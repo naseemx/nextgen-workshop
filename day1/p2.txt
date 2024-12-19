@@ -1,0 +1,18 @@
+block level
+1.<div>
+2.<p>
+3.<h1>
+4.<li>
+5.<section>
+6.<header>
+7.<footer>
+inline elemnt
+<span>
+<a>
+<strong>
+<em>
+<b>
+<i>
+<img>
+<code>  
+<mark>

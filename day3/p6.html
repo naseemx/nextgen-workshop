@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Playlist</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 20%;
+            background: #121212;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid #282828;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1DB954;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 15px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li:hover {
+            color: #1DB954;
+        }
+
+        /* Playlist Section */
+        .playlist {
+            width: 60%;
+            background: linear-gradient(to bottom, #181818, #121212);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .playlist h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #fff;
+            text-transform: uppercase;
+            border-bottom: 2px solid #1DB954;
+            padding-bottom: 10px;
+        }
+
+        .song {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: #222;
+            transition: background 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .song:hover {
+            background: #1DB954;
+            color: #000;
+            transform: scale(1.02);
+        }
+
+        .song.active {
+            background: #1DB954;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .song-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .song-details strong {
+            font-size: 18px;
+        }
+
+        .song-details small {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Player Bar */
+        .player-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            border-top: 1px solid #282828;
+            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-info {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .player-time {
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 20px;
+        }
+
+        .player-controls button {
+            background: #282828;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 10px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .player-controls button:hover {
+            background: #1DB954;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1DB954;
+            border-radius: 10px;
+        }
+
+        /* Waveform */
+        canvas {
+            width: 100%;
+            height: 50px;
+            background: #222;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>My Library</h2>
+        <ul class="nav-links">
+            <li>Liked Songs</li>
+            <li>Top Charts</li>
+            <li>New Releases</li>
+            <li>My Playlists</li>
+        </ul>
+    </div>
+
+    <!-- Playlist Section -->
+    <div class="playlist">
+        <h1>Music Playlist</h1>
+        <div id="songs">
+            <!-- Songs will be loaded here -->
+        </div>
+        <canvas id="waveform"></canvas>
+    </div>
+
+    <!-- Player Bar -->
+    <div class="player-bar">
+        <div class="player-info" id="current-song">No song playing</div>
+        <div class="player-time">
+            <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+        </div>
+        <div class="player-controls">
+            <button id="prev">&#9664;&#9664;</button>
+            <button id="play-pause">&#9654;</button>
+            <button id="next">&#9654;&#9664;</button>
+        </div>
+    </div>
+
+    <script>
+        const songs = [
+            { title: "m1", artist: "Artist 1", src: "music/m1.mp3" },
+            { title: "m2", artist: "Artist 2", src: "music/m2.mp3" },
+            { title: "m3", artist: "Artist 3", src: "music/m3.mp3" },
+            { title: "m4", artist: "Artist 4", src: "music/m4.mp3" }
+        ];
+
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        const audio = new Audio();
+        const currentSongDisplay = document.getElementById("current-song");
+        const currentTimeDisplay = document.getElementById("current-time");
+        const totalTimeDisplay = document.getElementById("total-time");
+        const waveformCanvas = document.getElementById("waveform");
+        const ctx = waveformCanvas.getContext("2d");
+
+        function loadSongs() {
+            const songsContainer = document.getElementById("songs");
+            songs.forEach((song, index) => {
+                const songElement = document.createElement("div");
+                songElement.classList.add("song");
+                songElement.dataset.index = index;
+                songElement.innerHTML = `<div class="song-details"><strong>${song.title}</strong><small>${song.artist}</small></div>`;
+                songElement.addEventListener("click", () => playSong(index));
+                songsContainer.appendChild(songElement);
+            });
+        }
+
+        function playSong(index) {
+            currentSongIndex = index;
+            audio.src = songs[index].src;
+            audio.play();
+            isPlaying = true;
+            updatePlayerUI();
+        }
+
+        function updatePlayerUI() {
+            document.querySelectorAll(".song").forEach(el => el.classList.remove("active"));
+            document.querySelector(`.song[data-index='${currentSongIndex}']`).classList.add("active");
+            currentSongDisplay.textContent = `${songs[currentSongIndex].title} - ${songs[currentSongIndex].artist}`;
+        }
+
+        audio.addEventListener("timeupdate", () => {
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+            totalTimeDisplay.textContent = formatTime(audio.duration);
+            drawWaveform(audio.currentTime / audio.duration);
+        });
+
+        function drawWaveform(progress) {
+            ctx.clearRect(0, 0, waveformCanvas.width, waveformCanvas.height);
+            ctx.fillStyle = "#1DB954";
+            ctx.fillRect(0, 0, waveformCanvas.width * progress, waveformCanvas.height);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+        }
+
+        document.getElementById("play-pause").addEventListener("click", () => {
+            if (isPlaying) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            isPlaying = !isPlaying;
+        });
+
+        loadSongs();
+    </script>
+</body>
+</html>

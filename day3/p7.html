@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #777;
+        }
+
+        /* Filter Buttons */
+        .filters {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .filter:hover {
+            background-color: #555;
+        }
+
+        /* Gallery Layout (Flexbox by default) */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .image {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px; /* Small border radius for images */
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 10px; /* Small border radius for images */
+        }
+
+        /* Hover Effects */
+        .gallery-img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Modal (Lightbox) Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ddd;
+        }
+
+        /* Grid Layout (for categories) - Row-wise layout */
+        .category {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Hide all categories initially */
+        .category {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Interactive Photo Gallery</h1>
+        <p>Explore beautiful images across different categories</p>
+    </header>
+
+    <!-- Category Filters -->
+    <div class="filters">
+        <button class="filter" data-category="nature">Nature</button>
+        <button class="filter" data-category="travel">Travel</button>
+        <button class="filter" data-category="art">Art</button>
+        <button class="filter" data-category="portraits">Portraits</button>
+        <button class="filter" data-category="all">All</button> <!-- Show all images -->
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery">
+        <!-- Nature Images -->
+        <div class="category nature">
+            <div class="image">
+                <img src="images/n1.jpg" alt="Nature 1" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/n2.jpg" alt="Nature 2" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/n3.jpg" alt="Nature 3" class="gallery-img">
+            </div>
+        </div>
+
+        <!-- Travel Images -->
+        <div class="category travel">
+            <div class="image">
+                <img src="images/n4.jpg" alt="Travel 1" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/n5.jpg" alt="Travel 2" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/n6.jpg" alt="Travel 3" class="gallery-img">
+            </div>
+        </div>
+
+        <!-- Art Images -->
+        <div class="category art">
+            <div class="image">
+                <img src="images/a1.jpg" alt="Art 1" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/a2.jpg" alt="Art 2" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/a3.jpg" alt="Art 3" class="gallery-img">
+            </div>
+        </div>
+
+        <!-- Portraits Images -->
+        <div class="category portraits">
+            <div class="image">
+                <img src="images/p1.jpg" alt="Portrait 1" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/p2.jpg" alt="Portrait 2" class="gallery-img">
+            </div>
+            <div class="image">
+                <img src="images/p3.jpg" alt="Portrait 3" class="gallery-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal (Lightbox) -->
+    <div id="modal" class="modal">
+        <span id="closeModal" class="close">&times;</span>
+        <img id="modalImg" class="modal-content">
+        <div id="caption" class="caption"></div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById("modal");
+        const modalImg = document.getElementById("modalImg");
+        const caption = document.getElementById("caption");
+        const closeModal = document.getElementById("closeModal");
+
+        const images = document.querySelectorAll(".gallery-img");
+        images.forEach((img) => {
+            img.addEventListener("click", () => {
+                modal.style.display = "flex";
+                modalImg.src = img.src;
+                caption.innerText = img.alt;
+            });
+        });
+
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Filter functionality
+        const filters = document.querySelectorAll(".filter");
+        filters.forEach((button) => {
+            button.addEventListener("click", () => {
+                const category = button.getAttribute("data-category");
+                const categories = document.querySelectorAll(".category");
+
+                // Show or hide categories based on selection
+                categories.forEach((categoryDiv) => {
+                    if (category === "all" || categoryDiv.classList.contains(category)) {
+                        categoryDiv.style.display = "grid"; // Use grid layout for category
+                    } else {
+                        categoryDiv.style.display = "none"; // Hide non-selected categories
+                    }
+                });
+
+                // If 'All' is clicked, show all categories
+                if (category === "all") {
+                    categories.forEach((categoryDiv) => {
+                        categoryDiv.style.display = "grid";
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

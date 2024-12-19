@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    /* Profile Header */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      color: white;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .profile-pic img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-info .username {
+      font-size: 24px;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .profile-info .bio {
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    /* Follow Button */
+    .follow-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .follow-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .follow-btn.unfollow {
+      background-color: #ff5733;
+    }
+
+    .follow-btn.unfollow:hover {
+      background-color: #c13c2f;
+      transform: scale(1.05);
+    }
+
+    /* Content */
+    .content {
+      display: flex;
+      margin-top: 20px;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* Posts Section */
+    .posts {
+      flex: 2;
+      margin-right: 20px;
+    }
+
+    .post {
+      background-color: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .post:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+    }
+
+    .post-pic img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    .post-info .post-username {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .post-info .post-time {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .post-body {
+      margin-top: 15px;
+    }
+
+    .post-image {
+      width: 100%;
+      height: 300px; /* Fixed size */
+      object-fit: cover;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    .post-footer {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .like-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .like-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .like-count {
+      margin-left: 10px;
+    }
+
+    /* Comments Section */
+    .comments {
+      margin-top: 15px;
+    }
+
+    .comment {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .comment-pic img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    .comment-text {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 10px;
+      width: 100%;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      flex: 1;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h3 {
+      margin-bottom: 15px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+    }
+
+    .sidebar ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar ul li img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-bar:focus {
+      border-color: #007bff;
+    }
+
+    /* Notification Icon */
+    .notification {
+      position: relative;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .notification .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 5px;
+      font-size: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: center;
+      background-color: #007bff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+      }
+
+      .posts {
+        margin-right: 0;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .follow-btn {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Search Bar -->
+  <input type="text" class="search-bar" placeholder="Search...">
+
+  <!-- Profile Header -->
+  <header class="profile-header">
+    <div class="profile-pic">
+      <img src="logos/w1.jpg" alt="Profile Picture">
+    </div>
+    <div class="profile-info">
+      <h1 class="username">John Doe</h1>
+      <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
+      <button class="follow-btn" onclick="toggleFollow()">Follow</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Posts Section -->
+    <section class="posts">
+      <div class="post">
+        <div class="post-header">
+          <div class="post-pic">
+            <img src="logos/w1.jpg" alt="User">
+          </div>
+          <div class="post-info">
+            <h2 class="post-username">John Doe</h2>
+            <span class="post-time" id="post-time">2 hours ago</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <p>This is a post with some text and an image.</p>
+          <img src="images/n6.jpg" alt="Post Image" class="post-image">
+        </div>
+        <div class="post-footer">
+          <button class="like-btn" onclick="toggleLike()">Like</button>
+          <span class="like-count" id="like-count">10 Likes</span>
+        </div>
+        <div class="comments">
+          <div class="comment">
+            <div class="comment-pic">
+              <img src="images/q1.jpg" alt="Friend">
+            </div>
+            <div class="comment-text">
+              <p>Nice post!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Posts -->
+      <div class="post">
+        <div class="post-header">
+          <div class="post-pic">
+            <img src="logos/a2.jpg" alt="User">
+          </div>
+          <div class="post-info">
+            <h2 class="post-username">Jane Doe</h2>
+            <span class="post-time">5 hours ago</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <p>This is another post with text and an image.</p>
+          <img src="images/o4.jpg" alt="Post Image" class="post-image">
+        </div>
+        <div class="post-footer">
+          <button class="like-btn" onclick="toggleLike()">Like</button>
+          <span class="like-count" id="like-count">5 Likes</span>
+        </div>
+        <div class="comments">
+          <div class="comment">
+            <div class="comment-pic">
+              <img src="images/q2.jpg" alt="Friend">
+            </div>
+            <div class="comment-text">
+              <p>Great picture!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">
+          <div class="post-pic">
+            <img src="logos/a3.jpg" alt="User">
+          </div>
+          <div class="post-info">
+            <h2 class="post-username">Alex Smith</h2>
+            <span class="post-time">1 day ago</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <p>Here's a post with just some text.</p>
+        </div>
+        <div class="post-footer">
+          <button class="like-btn" onclick="toggleLike()">Like</button>
+          <span class="like-count" id="like-count">20 Likes</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Friends</h3>
+      <ul>
+        <li><img src="images/q1.jpg" alt="Shreya"> Friend 1</li>
+        <li><img src="images/q2.jpg" alt="Musniya"> Friend 2</li>
+        <li><img src="images/q3.jpg" alt="Dhilna"> Friend 3</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="#">Profile</a>
+    <a href="#">Settings</a>
+    <a href="#">Notifications <span class="badge">3</span></a>
+  </footer>
+
+  <script>
+    let isFollowed = false;
+    let likeCount = 10;
+
+    function toggleFollow() {
+      const followBtn = document.querySelector('.follow-btn');
+      if (isFollowed) {
+        followBtn.textContent = 'Follow';
+        followBtn.classList.remove('unfollow');
+      } else {
+        followBtn.textContent = 'Unfollow';
+        followBtn.classList.add('unfollow');
+      }
+      isFollowed = !isFollowed;
+    }
+
+    function toggleLike() {
+      const likeBtn = document.querySelector('.like-btn');
+      const likeCountElem = document.getElementById('like-count');
+      if (likeBtn.textContent === 'Like') {
+        likeBtn.textContent = 'Unlike';
+        likeCount++;
+      } else {
+        likeBtn.textContent = 'Like';
+        likeCount--;
+      }
+      likeCountElem.textContent = likeCount + ' Likes';
+    }
+  </script>
+
+</body>
+</html>

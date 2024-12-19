@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Absolute and Relative Units</title>
+    <style>
+        body {
+            font-size: 16px; /* Base font size for relative units */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            font-size: 14px;
+            color: black;
+            text-align: center;
+        }
+
+        /* Absolute units */
+        .absolute-mm {
+            width: 50mm;
+            height: 30mm;
+            background-color: lightblue;
+        }
+
+        .absolute-px {
+            width: 200px;
+            height: 150px;
+            background-color: lightgreen;
+        }
+
+        /* Relative units */
+        .relative-em {
+            width: 10em; /* 10 times the font size of the parent element */
+            height: 5em;
+            background-color: lightcoral;
+        }
+
+        .relative-rem {
+            width: 15rem; /* 15 times the root font size */
+            height: 7.5rem;
+            background-color: lightgoldenrodyellow;
+        }
+
+        .relative-vw {
+            width: 50vw; /* 50% of the viewport width */
+            height: 25vw; /* 25% of the viewport width */
+            background-color: lightpink;
+        }
+
+        .relative-percent {
+            width: 50%; /* 50% of the parent container's width */
+            height: 50%; /* 50% of the parent container's height */
+            background-color: lightgray;
+        }
+
+        /* For demonstration of percentages */
+        .percent-container {
+            width: 500px;
+            height: 300px;
+            background-color: lightyellow;
+            position: relative;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Absolute and Relative Units</h1>
+
+    <div class="container">
+        <div class="absolute-mm box">50mm x 30mm</div>
+        <div class="absolute-px box">200px x 150px</div>
+        <div class="relative-em box">10em x 5em</div>
+        <div class="relative-rem box">15rem x 7.5rem</div>
+        <div class="relative-vw box">50vw x 25vw</div>
+    </div>
+
+    <h2>Percentage Example</h2>
+    <div class="percent-container">
+        <div class="relative-percent box">50% x 50%</div>
+    </div>
+</body>
+</html>

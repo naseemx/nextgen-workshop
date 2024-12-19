@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            color: #4f4f4f;
+        }
+
+        header {
+            background-color: #6a1b9a; /* Purple header */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .instructions {
+            background-color: #e1bee7;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .quiz-container {
+            padding: 20px;
+            background-color: white;
+            margin: 0 auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 40px; /* Space between timer and quiz */
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f3e5f5; /* Light purple for questions */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .question p {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .question input {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .question input[type="radio"]:checked + label {
+            background-color: #8e24aa; /* Darker purple for selected options */
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .question label:hover {
+            background-color: #d1c4e9;
+            cursor: pointer;
+        }
+
+        /* Submit button positioned at the top-right */
+        #submitButton {
+            position: fixed;
+            top: 80px; /* Add space between header and button */
+            right: 20px;
+            background-color: #8e24aa;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        #submitButton:hover {
+            background-color: #7b1fa2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #6a1b9a;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #timer {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #8e24aa;
+            position: fixed;
+            top: 60px; /* Adjusted to avoid overlap with submit button */
+            left: 50%;
+            transform: translateX(-50%); /* Center the timer */
+        }
+
+        .result-container {
+            padding: 20px;
+            text-align: center;
+            background-color: #e1bee7;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .result-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .result-container li {
+            padding: 10px;
+            background-color: #fff;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-container li.correct {
+            background-color: #8e24aa;
+            color: white;
+        }
+
+        .result-container li.incorrect {
+            background-color: #f44336;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Online Quiz</h1>
+    </header>
+    
+    <div class="instructions">
+        <h2>Instructions</h2>
+        <p>Answer all the questions within 5 minutes. Each correct answer gets 1 mark. There is no negative marking.</p>
+    </div>
+
+    <!-- Timer Display -->
+    <div id="timer">
+        <p>Time left: <span id="time">05:00</span></p>
+    </div>
+
+    <form id="quizForm" onsubmit="return calculateScore(event)">
+        <div class="quiz-container">
+            <!-- Question 1 -->
+            <div class="question" id="q1">
+                <p>1. What is the latest iPhone model?</p>
+                <input type="radio" id="q1a1" name="q1" value="iPhone 15">
+                <label for="q1a1">iPhone 15</label><br>
+                <input type="radio" id="q1a2" name="q1" value="iPhone 14">
+                <label for="q1a2">iPhone 14</label><br>
+                <input type="radio" id="q1a3" name="q1" value="iPhone 13">
+                <label for="q1a3">iPhone 13</label><br>
+                <input type="radio" id="q1a4" name="q1" value="iPhone 12">
+                <label for="q1a4">iPhone 12</label><br>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question" id="q2">
+                <p>2. What is the most popular gaming console?</p>
+                <input type="radio" id="q2a1" name="q2" value="PlayStation 5">
+                <label for="q2a1">PlayStation 5</label><br>
+                <input type="radio" id="q2a2" name="q2" value="Xbox Series X">
+                <label for="q2a2">Xbox Series X</label><br>
+                <input type="radio" id="q2a3" name="q2" value="Nintendo Switch">
+                <label for="q2a3">Nintendo Switch</label><br>
+                <input type="radio" id="q2a4" name="q2" value="PC">
+                <label for="q2a4">PC</label><br>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question" id="q3">
+                <p>3. Which company developed the Windows OS?</p>
+                <input type="radio" id="q3a1" name="q3" value="Microsoft">
+                <label for="q3a1">Microsoft</label><br>
+                <input type="radio" id="q3a2" name="q3" value="Apple">
+                <label for="q3a2">Apple</label><br>
+                <input type="radio" id="q3a3" name="q3" value="Google">
+                <label for="q3a3">Google</label><br>
+                <input type="radio" id="q3a4" name="q3" value="IBM">
+                <label for="q3a4">IBM</label><br>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question" id="q4">
+                <p>4. What is the latest version of Android OS?</p>
+                <input type="radio" id="q4a1" name="q4" value="Android 14">
+                <label for="q4a1">Android 14</label><br>
+                <input type="radio" id="q4a2" name="q4" value="Android 13">
+                <label for="q4a2">Android 13</label><br>
+                <input type="radio" id="q4a3" name="q4" value="Android 12">
+                <label for="q4a3">Android 12</label><br>
+                <input type="radio" id="q4a4" name="q4" value="Android 11">
+                <label for="q4a4">Android 11</label><br>
+            </div>
+
+        </div>
+    </form>
+
+    <!-- Submit button -->
+    <button id="submitButton" onclick="calculateScore(event)">Submit</button>
+
+    <footer>
+        <p>© 2024 Quiz Application</p>
+    </footer>
+
+    <script>
+        let timer;
+        let timeLeft = 5 * 60; // 5 minutes in seconds
+
+        // Format time in MM:SS format
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes < 10 ? '0' + minutes : minutes}:${remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds}`;
+        }
+
+        // Start the countdown timer
+        function startTimer() {
+            timer = setInterval(function() {
+                timeLeft--;
+                document.getElementById('time').innerText = formatTime(timeLeft);
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    alert("Time's up!");
+                    document.getElementById('quizForm').submit(); // Automatically submit when time runs out
+                }
+            }, 1000);
+        }
+
+        // Calculate and display the score
+        function calculateScore(event) {
+            event.preventDefault();
+
+            let score = 0;
+            const correctAnswers = {
+                q1: "iPhone 15",
+                q2: "PlayStation 5",
+                q3: "Microsoft",
+                q4: "Android 14",
+            };
+
+            // Check answers
+            for (let i = 1; i <= 4; i++) {
+                const question = document.querySelector(`input[name="q${i}"]:checked`);
+                if (question && question.value === correctAnswers[`q${i}`]) {
+                    score++;
+                }
+            }
+
+            // Show result after submission
+            showResult(score);
+        }
+
+        // Show result after quiz submission
+        function showResult(score) {
+            let resultHTML = `<div class="result-container"><h2>Your Score: ${score}/4</h2><p>Correct Answers:</p><ul>`;
+            const correctAnswers = {
+                q1: "iPhone 15",
+                q2: "PlayStation 5",
+                q3: "Microsoft",
+                q4: "Android 14",
+            };
+
+            for (let i = 1; i <= 4; i++) {
+                const userAnswer = document.querySelector(`input[name="q${i}"]:checked`);
+                resultHTML += `<li class="${userAnswer && userAnswer.value === correctAnswers[`q${i}`] ? 'correct' : 'incorrect'}">
+                    Q${i}: ${correctAnswers[`q${i}`]} - Your Answer: ${userAnswer ? userAnswer.value : 'No answer'}</li>`;
+            }
+
+            resultHTML += `</ul></div>`;
+            document.body.innerHTML = resultHTML; // Show result after quiz ends
+        }
+
+        // Start the timer when the page loads
+        window.onload = startTimer;
+    </script>
+</body>
+</html>

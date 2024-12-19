@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinder Registration for Boys</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external CSS if needed -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #000; /* Black font color for the entire page */
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff; /* Solid white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #ff3333; /* Red color for header */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="file"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover {
+            background-color: #ff1a1a;
+        }
+        .profile-img-preview {
+            max-width: 150px;
+            margin: 10px auto;
+            display: block;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Tinder Registration for Boys</h2>
+
+        <form action="submit_registration.php" method="POST" enctype="multipart/form-data">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full_name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="text" id="age" name="age" required>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="male" selected>Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Profile Picture -->
+            <div class="form-group">
+                <label for="profile-picture">Upload Profile Picture</label>
+                <input type="file" id="profile-picture" name="profile_picture" accept="image/*" onchange="previewImage(event)" required>
+            </div>
+            <img id="profile-img" class="profile-img-preview" src="images/default-profile.jpg" alt="Profile Image Preview">
+
+            <!-- Bio -->
+            <div class="form-group">
+                <label for="bio">Short Bio</label>
+                <textarea id="bio" name="bio" rows="4" placeholder="Write a short bio about yourself..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+
+        <div class="form-footer">
+            <p>Already have an account? <a href="#">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Preview profile picture
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('profile-img');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+</body>
+</html>

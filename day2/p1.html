@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Dishes Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .dish-section {
+            display: flex;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .dish-section video {
+            width: 300px;
+            height: 200px;
+            margin-right: 20px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .dish-details {
+            flex: 1;
+        }
+        .dish-details h2 {
+            margin: 0 0 10px;
+            font-size: 24px;
+            color: #333;
+        }
+        .dish-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .dish-details table th,
+        .dish-details table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .dish-details table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Dish 1: Biryani -->
+        <div class="dish-section">
+            <video src="videos/biryani.mp4" autoplay muted loop></video>
+            <div class="dish-details">
+                <h2>Biryani</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Hyderabadi Biryani</td><td>$12.00</td></tr>
+                        <tr><td>Veg Biryani</td><td>$10.00</td></tr>
+                        <tr><td>Chicken Biryani</td><td>$15.00</td></tr>
+                        <tr><td>Mutton Biryani</td><td>$18.00</td></tr>
+                        <tr><td>Egg Biryani</td><td>$11.00</td></tr>
+                        <tr><td>Prawn Biryani</td><td>$20.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Dish 2: Dosa -->
+        <div class="dish-section">
+            <video src="videos/dosa.mp4" autoplay muted loop></video>
+            <div class="dish-details">
+                <h2>Dosa</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Plain Dosa</td><td>$5.00</td></tr>
+                        <tr><td>Masala Dosa</td><td>$6.50</td></tr>
+                        <tr><td>Rava Dosa</td><td>$7.00</td></tr>
+                        <tr><td>Onion Dosa</td><td>$6.00</td></tr>
+                        <tr><td>Cheese Dosa</td><td>$8.00</td></tr>
+                        <tr><td>Paneer Dosa</td><td>$9.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Dish 3: Curry -->
+        <div class="dish-section">
+            <video src="videos/curry.mp4" autoplay muted loop></video>
+            <div class="dish-details">
+                <h2>Curry</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Butter Chicken</td><td>$14.00</td></tr>
+                        <tr><td>Paneer Butter Masala</td><td>$12.00</td></tr>
+                        <tr><td>Dal Tadka</td><td>$9.00</td></tr>
+                        <tr><td>Chana Masala</td><td>$10.00</td></tr>
+                        <tr><td>Fish Curry</td><td>$16.00</td></tr>
+                        <tr><td>Egg Curry</td><td>$11.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Dish 4: Naan -->
+        <div class="dish-section">
+            <video src="videos/naan.mp4" autoplay muted loop></video>
+            <div class="dish-details">
+                <h2>Naan</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Plain Naan</td><td>$2.00</td></tr>
+                        <tr><td>Butter Naan</td><td>$2.50</td></tr>
+                        <tr><td>Garlic Naan</td><td>$3.00</td></tr>
+                        <tr><td>Cheese Naan</td><td>$4.00</td></tr>
+                        <tr><td>Stuffed Naan</td><td>$4.50</td></tr>
+                        <tr><td>Chilli Naan</td><td>$3.50</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Dish 5: Sweets -->
+        <div class="dish-section">
+            <video src="videos/sweets.mp4" autoplay muted loop></video>
+            <div class="dish-details">
+                <h2>Sweets</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Gulab Jamun</td><td>$5.00</td></tr>
+                        <tr><td>Rasgulla</td><td>$5.50</td></tr>
+                        <tr><td>Jalebi</td><td>$4.00</td></tr>
+                        <tr><td>Kaju Katli</td><td>$6.00</td></tr>
+                        <tr><td>Ladoo</td><td>$3.50</td></tr>
+                        <tr><td>Barfi</td><td>$6.50</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

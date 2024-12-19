@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple - Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --primary-color: #0078d4;
+            --secondary-bg: #f4f4f4;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: #333;
+            color: #fff;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero {
+            background: url('images/f1.jpg') no-repeat center center/cover;
+            color: #050505;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .hero .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero .buttons a {
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .introduction {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding: 50px;
+            background: var(--secondary-bg);
+        }
+
+        .introduction img {
+            width: 50%;
+            border-radius: 10px;
+        }
+
+        .introduction div {
+            flex: 1;
+        }
+
+        .introduction h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .introduction p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .products {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .products h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .products .items {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .products .items .product {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .products .items .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .products .items .product h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .product-details {
+            padding: 50px;
+            text-align: center;
+            background: var(--secondary-bg);
+        }
+
+        .product-details h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .product-details p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .product-details ul {
+            list-style: disc;
+            padding-left: 40px;
+            text-align: left;
+        }
+
+        .product-details .product-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .product-details .product-info img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .location {
+            padding: 50px;
+            text-align: center;
+            background: var(--secondary-bg);
+        }
+
+        .location h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .map {
+            width: 100%;
+            height: 200px;
+            border: 0;
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        footer .socials {
+            display: flex;
+            gap: 15px;
+        }
+
+        footer .socials a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer p {
+            margin: 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Apple</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Innovation at Your Fingertips</h1>
+        <p>Discover the future of mobile technology with Apple.</p>
+        <div class="buttons">
+            <a href="#">Learn More</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </section>
+
+    <section class="introduction">
+        <img src="images/f2.jpg" alt="About Apple">
+        <div>
+            <h2>About Apple</h2>
+            <p>Apple is a leader in the phone industry, committed to innovation, design, and customer satisfaction. Our mission is to connect the world through groundbreaking technology while ensuring sustainability and user-friendly solutions.</p>
+            <p>Join us on our journey to redefine the boundaries of mobile experiences.</p>
+        </div>
+    </section>
+
+    <section class="products">
+        <h2>Our Products</h2>
+        <div class="items">
+            <div class="product">
+                <img src="images/f3.jpg" alt="iPhone">
+                <h3>iPhone</h3>
+                <a href="#iphone-details">View Details</a>
+            </div>
+            <div class="product">
+                <img src="images/f4.jpg" alt="AirPods">
+                <h3>AirPods</h3>
+                <a href="#airpods-details">View Details</a>
+            </div>
+            <div class="product">
+                <img src="images/f5.jpg" alt="iPad">
+                <h3>iPad</h3>
+                <a href="#ipad-details">View Details</a>
+            </div>
+            <div class="product">
+                <img src="images/f6.jpg" alt="MacBook">
+                <h3>MacBook</h3>
+                <a href="#macbook-details">View Details</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="iphone-details" class="product-details">
+        <h2>iPhone</h2>
+        <div class="product-info">
+            <img src="images/f3.jpg" alt="iPhone">
+            <div>
+                <p>The iPhone is Apple’s flagship smartphone, known for its innovative technology, sleek design, and powerful performance. Experience cutting-edge features like Face ID, advanced cameras, and unparalleled speed.</p>
+                <ul>
+                    <li><strong>Display:</strong> Super Retina XDR display with Ceramic Shield</li>
+                    <li><strong>Processor:</strong> A17 Bionic chip for unrivaled performance</li>
+                    <li><strong>Camera:</strong> 12 MP Ultra-Wide camera, 4K video recording</li>
+                    <li><strong>Battery:</strong> Up to 20 hours of video playback</li>
+                    <li><strong>Storage:</strong> 128GB, 256GB, 512GB, 1TB options</li>
+                    <li><strong>Operating System:</strong> iOS 17 with advanced features</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="airpods-details" class="product-details">
+        <h2>AirPods</h2>
+        <div class="product-info">
+            <img src="images/f4.jpg" alt="AirPods">
+            <div>
+                <p>Apple AirPods provide the ultimate wireless audio experience. With crystal-clear sound, noise cancellation, and seamless integration with Apple devices, they are the perfect companion for all your listening needs.</p>
+                <ul>
+                    <li><strong>Audio Quality:</strong> High-fidelity sound with spatial audio</li>
+                    <li><strong>Battery Life:</strong> Up to 6 hours of listening time</li>
+                    <li><strong>Connectivity:</strong> Bluetooth 5.0 with seamless Apple integration</li>
+                    <li><strong>Compatibility:</strong> Works with all Apple devices</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="ipad-details" class="product-details">
+        <h2>iPad</h2>
+        <div class="product-info">
+            <img src="images/f5.jpg" alt="iPad">
+            <div>
+                <p>The iPad combines portability with incredible performance, making it perfect for work, creativity, and entertainment. With a stunning display and compatibility with the Apple Pencil, it’s designed for productivity and more.</p>
+                <ul>
+                    <li><strong>Display:</strong> 12.9-inch Liquid Retina display with ProMotion</li>
+                    <li><strong>Processor:</strong> M2 chip for ultimate performance</li>
+                    <li><strong>Storage:</strong> 128GB, 256GB, 512GB, 1TB options</li>
+                    <li><strong>Compatibility:</strong> Supports Apple Pencil (2nd generation)</li>
+                    <li><strong>Battery Life:</strong> Up to 10 hours of surfing the web on Wi‑Fi</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="macbook-details" class="product-details">
+        <h2>MacBook</h2>
+        <div class="product-info">
+            <img src="images/f6.jpg" alt="MacBook">
+            <div>
+                <p>The MacBook is the epitome of power and portability. With cutting-edge processors, brilliant Retina displays, and a sleek design, it is the ultimate tool for professionals and creatives alike.</p>
+                <ul>
+                    <li><strong>Display:</strong> 13-inch Retina display with True Tone</li>
+                    <li><strong>Processor:</strong> Apple M2 chip for next-level performance</li>
+                    <li><strong>Storage:</strong> 256GB, 512GB, 1TB SSD options</li>
+                    <li><strong>Battery Life:</strong> Up to 18 hours of web browsing</li>
+                    <li><strong>Ports:</strong> Two Thunderbolt/USB 4 ports</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <p>Contact Us:</p>
+            <p>Email: contact@apple.com</p>
+            <p>Phone: +1 800-APPLE</p>
+        </div>
+        <div>
+            <h2>Find Us</h2>
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509684!2d-122.08842668468192!3d37.3316752798417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb5a750c1e1b1%3A0xf91cb9dd4bbee51!2sApple%20Park!5e0!3m2!1sen!2sus!4v1648830922678!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="socials">
+            <p>Follow Us:</p>
+            <a href="https://facebook.com/apple">Facebook</a>
+            <a href="https://twitter.com/apple">Twitter</a>
+            <a href="https://instagram.com/apple">Instagram</a>
+        </div>
+        <p>&copy; 2024 Apple Inc. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

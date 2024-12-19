@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+    
+
+    .row {
+      display: block;
+      margin: 20px 0; /* Equal spacing between rows */
+    }
+
+    .image-container {
+      display: inline-block;
+      width: 200px; /* Fixed width for all images */
+      height: 150px; /* Fixed height for all images */
+      margin: 0 15px; /* Equal horizontal spacing */
+    }
+
+    img {
+      width: 100%; /* Fill the container width */
+      height: 100%; /* Fill the container height */
+      object-fit: cover; /* Ensures images maintain aspect ratio without distortion */
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- First Row -->
+  <div class="row">
+    <div class="image-container">
+      <img src="images/p1.jpg" alt="Image p1">
+    </div>
+    <div class="image-container">
+      <img src="images/p2.jpg" alt="Image p2">
+    </div>
+    <div class="image-container">
+      <img src="images/p3.jpg" alt="Image p3">
+    </div>
+  </div>
+  
+  <!-- Second Row -->
+  <div class="row">
+    <div class="image-container">
+      <img src="images/a1.jpg" alt="Image a1">
+    </div>
+    <div class="image-container">
+      <img src="images/a2.jpg" alt="Image a2">
+    </div>
+    <div class="image-container">
+      <img src="images/a3.jpg" alt="Image a3">
+    </div>
+  </div>
+</body>
+</html>

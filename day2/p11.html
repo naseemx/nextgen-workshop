@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional for styling -->
+    <style>
+        /* Styling for overall page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f9f9f9;
+        }
+
+        /* Navigation styling */
+        nav {
+            width: 300px;
+            background-color: #333;
+            color: white;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #444;
+        }
+
+        nav li:hover {
+            background-color: #444;
+        }
+
+        nav li ul {
+            display: none;
+            background-color: #222;
+        }
+
+        nav li.open > ul {
+            display: block;
+        }
+
+        nav li ul li {
+            padding-left: 40px;
+        }
+
+        /* Product list styling */
+        .product-list {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-list h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product {
+            display: inline-block;
+            width: 30%;
+            margin: 1%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product h2 {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .product p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .product .description {
+            font-size: 14px;
+            color: #888;
+            margin: 10px 0;
+        }
+
+        .product .buy-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product .buy-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Scrollbar styling */
+        nav::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background-color: #555;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li onclick="toggleMenu(this)">Electronics
+                <ul>
+                    <li onclick="showProducts('mobile-phones', event)">Mobile Phones</li>
+                    <li onclick="showProducts('laptops', event)">Laptops</li>
+                    <li onclick="showProducts('cameras', event)">Cameras</li>
+                </ul>
+            </li>
+            <li onclick="toggleMenu(this)">Furniture
+                <ul>
+                    <li onclick="showProducts('sofas', event)">Sofas</li>
+                    <li onclick="showProducts('beds', event)">Beds</li>
+                    <li onclick="showProducts('dining-tables', event)">Dining Tables</li>
+                </ul>
+            </li>
+            <li onclick="toggleMenu(this)">Clothing
+                <ul>
+                    <li onclick="showProducts('mens-wear', event)">Men's Wear</li>
+                    <li onclick="showProducts('womens-wear', event)">Women's Wear</li>
+                    <li onclick="showProducts('kids-wear', event)">Kids' Wear</li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="product-list" id="product-list">
+        <h1>Welcome to Our Product Catalog</h1>
+        <p>Select a category from the navigation menu to view products.</p>
+    </div>
+
+    <script>
+        // Toggle subcategories in the navigation menu
+        function toggleMenu(element) {
+            element.classList.toggle('open');
+        }
+
+        // Show products for the selected category
+        function showProducts(category, event) {
+            event.stopPropagation(); // Prevent parent menu toggle
+
+            // Product data with descriptions
+            const products = {
+                'mobile-phones': [
+                    { name: 'iPhone 15', price: '₹82,000', image: 'images/p1.jpg', description: 'The latest iPhone with A16 Bionic chip and a powerful camera.' },
+                    { name: 'Samsung Galaxy S23', price: '₹74,000', image: 'images/p2.jpg', description: 'A high-end phone with an AMOLED display and 5G connectivity.' },
+                    { name: 'OnePlus 11', price: '₹57,000', image: 'images/p3.jpg', description: 'A sleek phone with excellent performance and fast charging.' }
+                ],
+                'laptops': [
+                    { name: 'MacBook Air', price: '₹98,000', image: 'images/p4.jpg', description: 'Ultra-lightweight laptop with Apple M2 chip for high performance.' },
+                    { name: 'Dell XPS 13', price: '₹82,000', image: 'images/p5.jpg', description: 'Compact and powerful laptop with a stunning display.' },
+                    { name: 'HP Spectre x360', price: '₹91,000', image: 'images/p6.jpg', description: 'A 2-in-1 laptop with premium design and long battery life.' }
+                ],
+                'cameras': [
+                    { name: 'Canon EOS R5', price: '₹3,20,000', image: 'images/p7.jpg', description: 'A professional-grade mirrorless camera with 8K video recording.' },
+                    { name: 'Sony Alpha a7 III', price: '₹1,65,000', image: 'images/p8.jpg', description: 'Full-frame mirrorless camera known for its fast autofocus.' },
+                    { name: 'Nikon Z6', price: '₹1,40,000', image: 'images/p9.jpg', description: 'A versatile camera with excellent low-light performance.' }
+                ],
+                'sofas': [
+                    { name: 'L-shaped Sofa', price: '₹57,000', image: 'images/p10.jpg', description: 'Spacious and stylish L-shaped sofa for any living room.' },
+                    { name: 'Recliner Sofa', price: '₹74,000', image: 'images/p11.jpg', description: 'A comfortable recliner sofa with adjustable seating positions.' },
+                    { name: 'Loveseat', price: '₹41,000', image: 'images/p12.jpg', description: 'Compact and cozy loveseat for smaller spaces.' }
+                ],
+                'beds': [
+                    { name: 'Queen Size Bed', price: '₹41,000', image: 'images/p13.jpg', description: 'A comfortable queen-sized bed for a perfect night’s sleep.' },
+                    { name: 'King Size Bed', price: '₹57,000', image: 'images/p14.jpg', description: 'Spacious king-sized bed for luxury and comfort.' },
+                    { name: 'Bunk Bed', price: '₹33,000', image: 'images/p15.jpg', description: 'A space-saving bunk bed for kids or guest rooms.' }
+                ],
+                'dining-tables': [
+                    { name: '6-Seater Wooden Table', price: '₹66,000', image: 'images/p16.jpg', description: 'A sturdy wooden dining table with seating for 6.' },
+                    { name: 'Glass Top Table', price: '₹49,000', image: 'images/p17.jpg', description: 'A stylish glass top dining table with modern design.' }
+                ],
+                'mens-wear': [
+                    { name: 'Formal Shirt', price: '₹4,000', image: 'images/p19.jpg', description: 'A sleek formal shirt made from premium fabric.' },
+                    { name: 'Casual Trousers', price: '₹4,800', image: 'images/p20.jpg', description: 'Comfortable and stylish trousers for everyday wear.' }
+                ],
+                'womens-wear': [
+                    { name: 'Party Dress', price: '₹8,000', image: 'images/p22.jpg', description: 'Elegant party dress perfect for special occasions.' },
+                    { name: 'Ethnic Kurta', price: '₹6,400', image: 'images/p23.jpg', description: 'A traditional ethnic kurta with intricate design.' }
+                ],
+                'kids-wear': [
+                    { name: 'T-shirt', price: '₹1,600', image: 'images/p25.jpg', description: 'A comfortable T-shirt made for active kids.' },
+                    { name: 'Summer Dress', price: '₹2,400', image: 'images/p26.jpg', description: 'A cute and breezy summer dress for girls.' }
+                ]
+            };
+
+            // Get the product list container
+            const productList = document.getElementById('product-list');
+
+            // Clear previous products
+            productList.innerHTML = '';
+
+            // Add new products
+            if (products[category]) {
+                products[category].forEach(product => {
+                    productList.innerHTML += `
+                        <div class="product">
+                            <img src="${product.image}" alt="${product.name}">
+                            <h2>${product.name}</h2>
+                            <p>${product.price}</p>
+                            <p class="description">${product.description}</p>
+                            <button class="buy-btn">Buy Now</button>
+                        </div>
+                    `;
+                });
+            } else {
+                productList.innerHTML = '<p>No products found.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

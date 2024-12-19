@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Partner</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F8FAFC;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #9AA6B2;
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+
+        /* Navigation Menu */
+        nav {
+            background-color: #BCCCDC;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 10px 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #D9EAFD;
+            border-radius: 5px;
+        }
+
+        /* Social Media Links */
+        .social-links {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            font-size: 1.5em;
+            color: #9AA6B2;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #D9EAFD;
+        }
+
+        /* Blog Post Section */
+        .blog-posts {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .post {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .post:hover {
+            transform: scale(1.05);
+        }
+
+        .post img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .post h2 {
+            font-size: 1.8em;
+            margin-top: 15px;
+        }
+
+        .post p {
+            font-size: 1em;
+            margin-top: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .post .tips {
+            font-size: 0.9em;
+            color: #9AA6B2;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .post .read-more {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #D9EAFD;
+            color: #9AA6B2;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .post .read-more:hover {
+            background-color: #BCCCDC;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #9AA6B2;
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        footer .social-links a {
+            margin: 0 15px;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background-color: #BCCCDC;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .contact-form button {
+            background-color: #9AA6B2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .contact-form button:hover {
+            background-color: #BCCCDC;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #9AA6B2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+        }
+
+        .back-to-top:hover {
+            background-color: #BCCCDC;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li a {
+                padding: 15px;
+                font-size: 1.5em;
+            }
+
+            .blog-posts {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Travel Partner</h1>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="#paris">Paris</a></li>
+            <li><a href="#tokyo">Tokyo</a></li>
+            <li><a href="#nyc">New York City</a></li>
+            <li><a href="#barcelona">Barcelona</a></li>
+        </ul>
+    </nav>
+
+    <!-- Social Media Links -->
+    <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+    </div>
+
+    <!-- Blog Post Section -->
+    <div class="blog-posts">
+        <!-- Paris Blog Post -->
+        <div class="post" id="paris">
+            <img src="images/o1.jpg" alt="Paris">
+            <h2>Exploring the City of Lights</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae justo sed neque fringilla consequat. Aenean nec mi vitae neque placerat condimentum.</p>
+            <p class="tips">Travel Tip: Always book your tickets to museums and attractions in advance to avoid long lines.</p>
+            <a href="#!" class="read-more">Read More</a>
+        </div>
+
+        <!-- Tokyo Blog Post -->
+        <div class="post" id="tokyo">
+            <img src="images/o2.jpg" alt="Tokyo">
+            <h2>Discovering the Beauty of Tokyo</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae justo sed neque fringilla consequat. Aenean nec mi vitae neque placerat condimentum.</p>
+            <p class="tips">Travel Tip: Don’t miss visiting the local shrines and trying authentic sushi at Tsukiji Market.</p>
+            <a href="#!" class="read-more">Read More</a>
+        </div>
+
+        <!-- New York City Blog Post -->
+        <div class="post" id="nyc">
+            <img src="images/o3.jpg" alt="New York City">
+            <h2>New York City: The Big Apple</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae justo sed neque fringilla consequat. Aenean nec mi vitae neque placerat condimentum.</p>
+            <p class="tips">Travel Tip: Take a walking tour to explore Central Park’s hidden gems.</p>
+            <a href="#!" class="read-more">Read More</a>
+        </div>
+
+        <!-- Barcelona Blog Post -->
+        <div class="post" id="barcelona">
+            <img src="images/o4.jpg" alt="Barcelona">
+            <h2>Wandering Through Barcelona</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae justo sed neque fringilla consequat. Aenean nec mi vitae neque placerat condimentum.</p>
+            <p class="tips">Travel Tip: Don’t forget to visit the iconic Sagrada Familia and explore Gaudí’s masterpieces.</p>
+            <a href="#!" class="read-more">Read More</a>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-form">
+        <h3>Contact Us</h3>
+        <form action="#">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Travel Partner</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="window.scrollTo(0, 0);">Top</button>
+
+    <script>
+        // Show the Back to Top button when scrolling
+        window.onscroll = function () {
+            const button = document.querySelector('.back-to-top');
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+
+</html>

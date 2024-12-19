@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Absolute Units Example</title>
+    <style>
+        .millimeters {
+            width: 50mm;
+            height: 30mm;
+            background-color: lightblue;
+        }
+
+        .centimeters {
+            width: 5cm;
+            height: 3cm;
+            background-color: lightgreen;
+        }
+
+        .inches {
+            width: 2in;
+            height: 1in;
+            background-color: lightcoral;
+        }
+
+        .points {
+            width: 150pt;
+            height: 100pt;
+            background-color: lightgoldenrodyellow;
+        }
+
+        .picas {
+            width: 12pc;
+            height: 8pc;
+            background-color: lightpink;
+        }
+
+        .pixels {
+            width: 200px;
+            height: 150px;
+            background-color: lightgray;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            font-size: 14px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Absolute Units</h1>
+    <div class="container">
+        <div class="millimeters box">50mm x 30mm</div>
+        <div class="centimeters box">5cm x 3cm</div>
+        <div class="inches box">2in x 1in</div>
+        <div class="points box">150pt x 100pt</div>
+        <div class="picas box">12pc x 8pc</div>
+        <div class="pixels box">200px x 150px</div>
+    </div>
+</body>
+</html>

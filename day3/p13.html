@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .grade-cell {
+            width: 100px;
+        }
+
+        .grade-A { background-color: #4CAF50; color: white; }
+        .grade-B { background-color: #8BC34A; color: white; }
+        .grade-C { background-color: #FFEB3B; color: black; }
+        .grade-D { background-color: #FF9800; color: white; }
+        .grade-F { background-color: #F44336; color: white; }
+
+        .summary {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .summary div {
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #FF6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            background-color: #FF4500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Student Grade Tracker</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Assignment 1</th>
+                    <th>Assignment 2</th>
+                    <th>Assignment 3</th>
+                    <th>Assignment 4</th>
+                    <th>Average</th>
+                </tr>
+            </thead>
+            <tbody id="grades-table">
+                <tr>
+                    <td>Math</td>
+                    <td><input type="number" class="grade-input" data-subject="Math" data-assignment="1" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Math" data-assignment="2" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Math" data-assignment="3" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Math" data-assignment="4" /></td>
+                    <td class="subject-average" id="Math-average">-</td>
+                </tr>
+                <tr>
+                    <td>English</td>
+                    <td><input type="number" class="grade-input" data-subject="English" data-assignment="1" /></td>
+                    <td><input type="number" class="grade-input" data-subject="English" data-assignment="2" /></td>
+                    <td><input type="number" class="grade-input" data-subject="English" data-assignment="3" /></td>
+                    <td><input type="number" class="grade-input" data-subject="English" data-assignment="4" /></td>
+                    <td class="subject-average" id="English-average">-</td>
+                </tr>
+                <tr>
+                    <td>Science</td>
+                    <td><input type="number" class="grade-input" data-subject="Science" data-assignment="1" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Science" data-assignment="2" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Science" data-assignment="3" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Science" data-assignment="4" /></td>
+                    <td class="subject-average" id="Science-average">-</td>
+                </tr>
+                <tr>
+                    <td>History</td>
+                    <td><input type="number" class="grade-input" data-subject="History" data-assignment="1" /></td>
+                    <td><input type="number" class="grade-input" data-subject="History" data-assignment="2" /></td>
+                    <td><input type="number" class="grade-input" data-subject="History" data-assignment="3" /></td>
+                    <td><input type="number" class="grade-input" data-subject="History" data-assignment="4" /></td>
+                    <td class="subject-average" id="History-average">-</td>
+                </tr>
+                <tr>
+                    <td>Art</td>
+                    <td><input type="number" class="grade-input" data-subject="Art" data-assignment="1" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Art" data-assignment="2" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Art" data-assignment="3" /></td>
+                    <td><input type="number" class="grade-input" data-subject="Art" data-assignment="4" /></td>
+                    <td class="subject-average" id="Art-average">-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="summary">
+            <div id="overall-summary">Overall Average: -</div>
+        </div>
+
+        <button id="reset-button">Reset All Grades</button>
+    </div>
+
+    <script>
+        // Grade Scale Mapping
+        const getGradeClass = (grade) => {
+            if (grade >= 90) return "grade-A";
+            if (grade >= 80) return "grade-B";
+            if (grade >= 70) return "grade-C";
+            if (grade >= 60) return "grade-D";
+            return "grade-F";
+        };
+
+        // Calculate averages
+        const calculateAverage = (subject) => {
+            const inputs = document.querySelectorAll(`input[data-subject="${subject}"]`);
+            let sum = 0;
+            let count = 0;
+            inputs.forEach(input => {
+                const grade = parseFloat(input.value);
+                if (!isNaN(grade)) {
+                    sum += grade;
+                    count++;
+                }
+            });
+            if (count > 0) {
+                const average = sum / count;
+                document.getElementById(`${subject}-average`).innerText = average.toFixed(2);
+                return average;
+            }
+            return 0;
+        };
+
+        // Calculate overall average
+        const calculateOverallAverage = () => {
+            const subjects = ['Math', 'English', 'Science', 'History', 'Art'];
+            let sum = 0;
+            let count = 0;
+            subjects.forEach(subject => {
+                const avg = calculateAverage(subject);
+                if (avg > 0) {
+                    sum += avg;
+                    count++;
+                }
+            });
+            const overallAverage = (sum / count).toFixed(2);
+            document.getElementById('overall-summary').innerText = `Overall Average: ${overallAverage}`;
+        };
+
+        // Reset grades
+        document.getElementById('reset-button').addEventListener('click', () => {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            const subjectAverages = document.querySelectorAll('.subject-average');
+            subjectAverages.forEach(avg => {
+                avg.innerText = '-';
+            });
+            document.getElementById('overall-summary').innerText = 'Overall Average: -';
+        });
+
+        // Event listener for grade inputs
+        document.querySelectorAll('.grade-input').forEach(input => {
+            input.addEventListener('input', () => {
+                const subject = input.dataset.subject;
+                const assignment = input.dataset.assignment;
+                input.className = `grade-input ${getGradeClass(parseFloat(input.value) || 0)}`;
+                calculateAverage(subject);
+                calculateOverallAverage();
+            });
+        });
+    </script>
+
+</body>
+</html>

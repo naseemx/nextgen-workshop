@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Row</title>
+    <style>
+        body {
+            font-family: 'Arial, sans-serif';
+        }
+        .product-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+        .product {
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            width: 30%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .product img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+        }
+        .product h3 {
+            margin: 10px 0;
+        }
+        .product p {
+            margin: 10px 0;
+            color: #555;
+        }
+        .product ul {
+            text-align: left;
+            margin: 10px 0;
+            padding: 0 20px;
+            color: #555;
+        }
+        .product li {
+            margin-bottom: 5px;
+        }
+        .product button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-row">
+        <!-- iPhone Product -->
+        <div class="product">
+            <img src="images/iphone.jpg" alt="iPhone">
+            <h3>iPhone 14</h3>
+            <p>The latest iPhone with advanced features and stunning design:</p>
+            <ul>
+                <li>6.1-inch Super Retina XDR display</li>
+                <li>A15 Bionic chip</li>
+                <li>Dual-camera system with 12MP main lens</li>
+                <li>All-day battery life</li>
+                <li>Price: $799</li>
+            </ul>
+            <button>Buy Me</button>
+        </div>
+
+        <!-- Galaxy S24 Ultra Product -->
+        <div class="product">
+            <img src="images/samsung.jpg" alt="Galaxy S24 Ultra">
+            <h3>Galaxy S24 Ultra</h3>
+            <p>Experience next-level performance with the Galaxy S24 Ultra:</p>
+            <ul>
+                <li>6.8-inch Dynamic AMOLED 2X display</li>
+                <li>Snapdragon 8 Gen 3 processor</li>
+                <li>Quad-camera setup with 200MP main lens</li>
+                <li>5000mAh battery with fast charging</li>
+                <li>Price: $1,199</li>
+            </ul>
+            <button>Buy Me</button>
+        </div>
+
+        <!-- Redmi Phone Product -->
+        <div class="product">
+            <img src="images/redmi.jpg" alt="Redmi Phone">
+            <h3>Redmi Note 11 Pro</h3>
+            <p>Affordable and powerful, the Redmi phone is perfect for everyone:</p>
+            <ul>
+                <li>6.67-inch AMOLED display</li>
+                <li>MediaTek Helio G96 processor</li>
+                <li>108MP quad-camera setup</li>
+                <li>5000mAh battery with 67W turbo charging</li>
+                <li>Price: $299</li>
+            </ul>
+            <button>Buy Me</button>
+        </div>
+    </div>
+</body>
+</html>
