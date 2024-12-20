@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Haven</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Gourmet Haven</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                <li class="nav-item">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="darkModeSwitch">
+                        <label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+            <h1 class="display-4">Gourmet Haven</h1>
+            <p class="lead">Fine Dining Redefined</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Explore Menu</a>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/p1.jpg" class="card-img-top" alt="Dish 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Dish 1</h5>
+                        <p class="card-text">A delicious dish made with fresh ingredients and a touch of love.</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/p2.jpg" class="card-img-top" alt="Dish 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Dish 2</h5>
+                        <p class="card-text">A savory dish that combines flavors from around the world.</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/p3.jpg" class="card-img-top" alt="Dish 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Dish 3</h5>
+                        <p class="card-text">A delightful dish that will leave you wanting more.</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/p4.jpg" class="card-img-top" alt="Dish 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Dish 4</h5>
+                        <p class="card-text">A perfect blend of spices and flavors in every bite.</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/p5.jpg" class="card-img-top" alt="Dish 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Dish 5</h5>
+                        <p class="card-text">A mouth-watering dish that is sure to satisfy your cravings.</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/p6.jpg" class="card-img-top" alt="Dish 6">
+                    <div class="card-body">
+                        <h5 class="card-title">Dish 6</h5>
+                        <p class="card-text">A delectable dish that is both healthy and delicious.</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <div class="container">
+            <p>Follow us on:</p>
+            <a href="#" class="mr-3">Facebook</a>
+            <a href="#" class="mr-3">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const toggleSwitch = document.getElementById('darkModeSwitch');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+            if (currentTheme === 'dark-mode') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        toggleSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light-mode');
+            }
+        });
+
+        // Add dark-mode styles
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .dark-mode {
+                background-color: #121212;
+                color: #ffffff;
+            }
+            .dark-mode .navbar, .dark-mode .footer {
+                background-color: #1f1f1f;
+            }
+            .dark-mode .jumbotron {
+                background-color: #343a40;
+                color: #ffffff;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

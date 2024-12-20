@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+        .task-card {
+            background: #2c3e50;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgb(255, 255, 255);
+            color: white;
+        }
+        #taskInput {
+            border-radius: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: #34495e;
+            color: white;
+        }
+        .btn-primary {
+            border-radius: 30px;
+            padding: 10px 20px;
+            background: #2980b9;
+            border: none;
+        }
+        .btn-danger {
+            background: #e74c3c;
+            border: none;
+        }
+        .navbar, .footer {
+            background: #34495e;
+        }
+        .form-check-label {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#"></a>
+                <img src="logo.png" alt="Logo" width="40" height="40" class="me-2">
+                Task Manager
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"></button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 d-flex flex-column align-items-center">
+        <!-- Task Form -->
+        <div class="task-card col-md-6">
+            <form id="taskForm" class="d-flex mb-3"></form>
+                <input type="text" id="taskInput" class="form-control me-2" placeholder="Enter a task">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle me-2"></i>Add Task</button>
+            </form>
+            <div id="taskFeedback" class="text-danger"></div>
+        </div>
+
+        <!-- Task List -->
+        <div class="col-md-6 mt-4" id="taskListContainer" style="display: none;">
+            <ul class="list-group" id="taskList">
+                <!-- Tasks will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Additional UI Elements -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Task Statistics -->
+            <div class="col-md-6 mb-4">
+                <div class="task-card">
+                    <h5 class="mb-3"><i class="bi bi-bar-chart-fill me-2"></i>Task Statistics</h5>
+                    <p>Total Tasks: <span id="totalTasks">0</span></p>
+                    <p>Completed Tasks: <span id="completedTasks">0</span></p>
+                </div>
+            </div>
+
+            <!-- Task Filters -->
+            <div class="col-md-6 mb-4">
+                <div class="task-card">
+                    <h5 class="mb-3"><i class="bi bi-funnel-fill me-2"></i>Filter Tasks</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="taskFilter" id="allTasks" value="all" checked>
+                        <label class="form-check-label" for="allTasks">
+                            All Tasks
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="taskFilter" id="completedTasksFilter" value="completed">
+                        <label class="form-check-label" for="completedTasksFilter">
+                            Completed Tasks
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="taskFilter" id="pendingTasks" value="pending">
+                        <label class="form-check-label" for="pendingTasks">
+                            Pending Tasks
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; 2023 Task Manager. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskForm = document.getElementById('taskForm');
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+            const taskListContainer = document.getElementById('taskListContainer');
+            const taskFeedback = document.getElementById('taskFeedback');
+            const totalTasks = document.getElementById('totalTasks');
+            const completedTasks = document.getElementById('completedTasks');
+            const taskFilterRadios = document.getElementsByName('taskFilter');
+
+            // Add Task
+            taskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const taskName = taskInput.value.trim();
+
+                if (taskName === '') {
+                    taskFeedback.textContent = 'Task name cannot be empty.';
+                    return;
+                }
+
+                taskFeedback.textContent = '';
+
+                // Show Task List Container
+                taskListContainer.style.display = 'block';
+
+                // Create Task Item
+                const taskItem = document.createElement('li');
+                taskItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+                const taskText = document.createElement('span');
+                taskText.textContent = taskName;
+
+                const taskControls = document.createElement('div');
+
+                // Completion Checkbox
+                const taskCheckbox = document.createElement('input');
+                taskCheckbox.type = 'checkbox';
+                taskCheckbox.className = 'form-check-input me-2';
+                taskCheckbox.addEventListener('change', () => {
+                    taskText.style.textDecoration = taskCheckbox.checked ? 'line-through' : 'none';
+                    updateTaskStatistics();
+                });
+
+                // Delete Button
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-danger btn-sm';
+                deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+                deleteButton.addEventListener('click', () => {
+                    taskList.removeChild(taskItem);
+                    if (taskList.children.length === 0) {
+                        taskListContainer.style.display = 'none';
+                    }
+                    updateTaskStatistics();
+                });
+
+                taskControls.appendChild(taskCheckbox);
+                taskControls.appendChild(deleteButton);
+                taskItem.appendChild(taskText);
+                taskItem.appendChild(taskControls);
+
+                taskList.appendChild(taskItem);
+
+                taskInput.value = '';
+                updateTaskStatistics();
+            });
+
+            const updateTaskStatistics = () => {
+                const tasks = taskList.children;
+                const total = tasks.length;
+                const completed = Array.from(tasks).filter(task => task.querySelector('input[type="checkbox"]').checked).length;
+
+                totalTasks.textContent = total;
+                completedTasks.textContent = completed;
+            };
+
+            taskFilterRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    const filter = document.querySelector('input[name="taskFilter"]:checked').value;
+                    Array.from(taskList.children).forEach(task => {
+                        const isCompleted = task.querySelector('input[type="checkbox"]').checked;
+                        if (filter === 'all' || (filter === 'completed' && isCompleted) || (filter === 'pending' && !isCompleted)) {
+                            task.style.display = '';
+                        } else {
+                            task.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
